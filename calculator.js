@@ -34,13 +34,7 @@ $(document).ready(function(){
 
 	// handles click on clear btn
 	$(".clear").on("click", function(){
-		// clear the display
-		$("#first-number").html("");
-		$("#second-number").html("");
-		$("#operator").html("");
-		$("#result").html("");
-
-		// reset calculator values
+		clearDisplay();
 		resetCalculator();
 	});
 });
@@ -49,6 +43,11 @@ function resetCalculator() {
 	arrNumbers = [];
 	arrOperators = [];
 	curi = 0;
+}
+
+function clearDisplay() {
+		$("#output").innerHTML("");
+		$("#result").innerHTML("");
 }
 
 function doMath(numbers, maths){
