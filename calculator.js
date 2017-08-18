@@ -45,11 +45,6 @@ $(document).ready(function(){
 	});
 });
 
-function log() {
-	console.log("arrNumbers:", arrNumbers, "arrOperators", arrOperators,
-			"curi:", curi);
-}
-
 function resetCalculator() {
 	arrNumbers = [];
 	arrOperators = [];
