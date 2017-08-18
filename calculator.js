@@ -27,8 +27,6 @@ $(document).ready(function(){
 		var result;
 		result = doMath(arrNumbers, arrOperators);
 		$("#result").html(result);
-		log();
-		console.log(result);
 		resetCalculator();
 	});
 
