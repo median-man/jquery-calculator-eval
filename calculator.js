@@ -52,8 +52,8 @@ function renderItem(s) {
 }
 
 function clearDisplay() {
-		$("#output").innerHTML("");
-		$("#result").innerHTML("");
+		$("#output").html("");
+		$("#result").html("");
 }
 
 function doMath(numbers, maths){
