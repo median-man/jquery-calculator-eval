@@ -57,26 +57,26 @@ function resetCalculator() {
 }
 
 function doMath(numbers, maths){
-	var answer = parseInt(numbers[0]);
+	var answerString = numbers[0];
 	for(var i=0; i<numbers.length-1; i++){
 		var secondNum = parseInt(numbers[i+1]);
 		switch(maths[i]){
 			case "plus":
-				answer += secondNum;
+				answerString += " + " + secondNum;
 				break;
 			case "minus":
-				answer -= secondNum;
+				answerString += " - " + secondNum;
 				break;
 			case "times":
-				answer *= secondNum;
+				answerString += " * " + secondNum;
 				break;
 			case "divide":
-				answer /= secondNum;
+				answerString += " / " + secondNum;
 				break;
 			case "power":
-				answer = Math.pow(answer, secondNum);
+				answerString = " Math.pow((" + answerString + "), " + secondNum + ")";
 				break;
 		}
 	}
-	return answer;
+	return eval(answerString);
 }
