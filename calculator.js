@@ -11,15 +11,18 @@ $(document).ready(function(){
 			arrNumbers.push("");
 		}
 		arrNumbers[curi] += this.value;
-		$("#first-number").html(arrNumbers[0]);
-		$("#second-number").html(arrNumbers[1]);
+		renderItem(this.value);
 	});
 
 	// handle click on an operator
 	$(".operator").on("click", function(){
-		arrOperators.push(this.value);
-		$("#operator").html($(this).text());
-		curi++;
+		// add operator to arrOperators if previous
+		// user entry was not an operator
+		if ( arrOperators.length !== arrNumbers.length ) {
+			arrOperators.push(this.value);
+			renderItem($(this).text());
+			curi++;
+		}
 	});
 
 	// handle click on equals
@@ -32,13 +35,7 @@ $(document).ready(function(){
 
 	// handles click on clear btn
 	$(".clear").on("click", function(){
-		// clear the display
-		$("#first-number").html("");
-		$("#second-number").html("");
-		$("#operator").html("");
-		$("#result").html("");
-
-		// reset calculator values
+		clearDisplay();
 		resetCalculator();
 	});
 });
@@ -47,6 +44,16 @@ function resetCalculator() {
 	arrNumbers = [];
 	arrOperators = [];
 	curi = 0;
+}
+
+// displays the passed string on the calculator "screen"
+function renderItem(s) {
+	$("#output").append($("<h1>").text(s));
+}
+
+function clearDisplay() {
+		$("#output").innerHTML("");
+		$("#result").innerHTML("");
 }
 
 function doMath(numbers, maths){
