@@ -1,6 +1,3 @@
-
-var arrNumbers, arrOperators, curi;
-
 $(document).ready(function(){
 
 	resetCalculator();
@@ -11,18 +8,15 @@ $(document).ready(function(){
 			arrNumbers.push("");
 		}
 		arrNumbers[curi] += this.value;
-		renderItem(this.value);
+		$("#first-number").html(arrNumbers[0]);
+		$("#second-number").html(arrNumbers[1]);
 	});
 
 	// handle click on an operator
 	$(".operator").on("click", function(){
-		// add operator to arrOperators if previous
-		// user entry was not an operator
-		if ( arrOperators.length !== arrNumbers.length ) {
-			arrOperators.push(this.value);
-			renderItem($(this).text());
-			curi++;
-		}
+		arrOperators.push(this.value);
+		$("#operator").html($(this).text());
+		curi++;
 	});
 
 	// handle click on equals
@@ -30,12 +24,20 @@ $(document).ready(function(){
 		var result;
 		result = doMath(arrNumbers, arrOperators);
 		$("#result").html(result);
+		log();
+		console.log(result);
 		resetCalculator();
 	});
 
 	// handles click on clear btn
 	$(".clear").on("click", function(){
-		clearDisplay();
+		// clear the display
+		$("#first-number").html("");
+		$("#second-number").html("");
+		$("#operator").html("");
+		$("#result").html("");
+
+		// reset calculator values
 		resetCalculator();
 	});
 });
@@ -44,16 +46,6 @@ function resetCalculator() {
 	arrNumbers = [];
 	arrOperators = [];
 	curi = 0;
-}
-
-// displays the passed string on the calculator "screen"
-function renderItem(s) {
-	$("#output").append($("<h1>").text(s));
-}
-
-function clearDisplay() {
-		$("#output").html("");
-		$("#result").html("");
 }
 
 function doMath(numbers, maths){
