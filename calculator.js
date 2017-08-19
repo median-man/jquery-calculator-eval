@@ -9,10 +9,6 @@ $(document).ready(function(){
 	$(".number").on("click", function(){
 		if ( !arrNumbers[curi] ) {
 			arrNumbers.push("");
-		// if result is displayed, clear the calculator display
-		}
-		if ( resultIsVisible() ) {
-			clearDisplay();
 		}
 		arrNumbers[curi] += this.value;
 		renderItem(this.value);
@@ -32,7 +28,6 @@ $(document).ready(function(){
 	// handle click on equals
 	$(".equal").on("click", function(){
 		var result;
-		console.log("arrNumbers", arrNumbers, "arrOperators", arrOperators);
 		result = doMath(arrNumbers, arrOperators);
 		$("#result").html(result);
 		resetCalculator();
@@ -44,12 +39,6 @@ $(document).ready(function(){
 		resetCalculator();
 	});
 });
-
-// returns true if the result is visible on the calculator
-// display. else returns false
-function resultIsVisible() {
-	return ( $("#result").text().length > 0 );
-}
 
 function resetCalculator() {
 	arrNumbers = [];

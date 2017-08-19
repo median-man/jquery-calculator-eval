@@ -1,6 +1,9 @@
 # jquery-calculator
 A simple calculator with jQuery.
 
+## Bugs to Fix
+* unable to render numbers of > 1 digit
+
 ## Fixes and Features
 * Fixed order of operations bug (thanks Tim!).
 * Calculator can display more than 2 numbers and one operator.
