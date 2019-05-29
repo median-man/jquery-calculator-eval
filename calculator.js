@@ -43,8 +43,26 @@ $(document).ready(function(){
 });
 
 function renderInput() {
-  $("#first-number").html(arrNumbers[0]);
-  $("#second-number").html(arrNumbers[1]);
+  var operator = lookupOperatorHtml(arrOperators[arrOperators.length - 1])
+  var children = [
+    $('<h1 id="first-number">').text(arrNumbers[0] || ''),
+    $('<h1 id="operator">').html(operator || ''),
+    $('<h1 id="second-number">').text(arrNumbers[1] || ''),
+    $('<hr>'),
+    $('<h1 id="result">')
+  ]
+  $('#calculator-output').empty().append(children)
+}
+
+function lookupOperatorHtml(operator) {
+  var mapper = {
+    plus: '+',
+    minus: '&minus;',
+    times: '&times;',
+    divide: '&divide;',
+    power: '^'
+  }
+  return mapper[operator] || ''
 }
 
 function resetCalculator() {
