@@ -1,6 +1,7 @@
 var arrNumbers
 var arrOperators
 var curi
+var result
 
 $(document).ready(function() {
   resetCalculator()
@@ -11,46 +12,38 @@ $(document).ready(function() {
       arrNumbers.push('')
     }
     arrNumbers[curi] += this.value
-    renderInput()
+    renderCalculatorOutput()
   })
 
   // handle click on an operator
   $('.operator').on('click', function() {
     arrOperators.push(this.value)
-    $('#operator').html($(this).text())
     curi++
+    renderCalculatorOutput()
   })
 
-  // handle click on equals
+  // renders result of math and resets values
   $('.equal').on('click', function() {
-    var result
     result = doMath(arrNumbers, arrOperators)
     $('#result').html(result)
     resetCalculator()
   })
 
-  // handles click on clear btn
+  // clear values and output view
   $('.clear').on('click', function() {
-    // clear the display
-    $('#first-number').html('')
-    $('#second-number').html('')
-    $('#operator').html('')
-    $('#result').html('')
-
-    // reset calculator values
     resetCalculator()
+    renderCalculatorOutput()
   })
 })
 
-function renderInput() {
+function renderCalculatorOutput() {
   var operator = lookupOperatorHtml(arrOperators[arrOperators.length - 1])
-  var children = [
-    $('<h1 id="first-number">').text(arrNumbers[0] || ''),
-    $('<h1 id="operator">').html(operator || ''),
-    $('<h1 id="second-number">').text(arrNumbers[1] || ''),
-    $('<hr>'),
-    $('<h1 id="result">')
-  ]
+  var children = []
+  children.push($('<h1 id="first-number">').text(arrNumbers[0]))
+  children.push($('<h1 id="operator">').html(operator || ''))
+  children.push($('<h1 id="second-number">').text(arrNumbers[1]))
+  children.push($('<hr>'))
+  children.push($('<h1 id="result">').text(result))
   $('#calculator-output')
     .empty()
     .append(children)
@@ -71,6 +64,7 @@ function resetCalculator() {
   arrNumbers = []
   arrOperators = []
   curi = 0
+  result = ''
 }
 
 function doMath(numbers, maths) {
