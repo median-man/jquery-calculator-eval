@@ -25,7 +25,7 @@ $(document).ready(function() {
   // renders result of math and resets values
   $('.equal').on('click', function() {
     result = doMath(arrNumbers, arrOperators)
-    $('#result').html(result)
+    renderCalculatorOutput()
     resetCalculator()
   })
 
@@ -37,19 +37,29 @@ $(document).ready(function() {
 })
 
 function renderCalculatorOutput() {
-  var operator = lookupOperatorHtml(arrOperators[arrOperators.length - 1])
+  var i
   var children = []
-  children.push($('<h1 id="first-number">').text(arrNumbers[0]))
-  children.push($('<h1 id="operator">').html(operator || ''))
-  children.push($('<h1 id="second-number">').text(arrNumbers[1]))
+
+  children.push(renderNumber(arrNumbers[0]))
+
+  for (i = 0; i < arrOperators.length; i += 1) {
+    children.push(renderOperator(arrOperators[i]))
+    children.push(renderNumber(arrNumbers[i + 1]))
+  }
+
   children.push($('<hr>'))
-  children.push($('<h1 id="result">').text(result))
+  children.push(renderNumber(result))
+
   $('#calculator-output')
     .empty()
     .append(children)
 }
 
-function lookupOperatorHtml(operator) {
+function renderNumber(number) {
+  return $('<h1>').text(number)
+}
+
+function renderOperator(operator) {
   var mapper = {
     plus: '+',
     minus: '&minus;',
@@ -57,7 +67,7 @@ function lookupOperatorHtml(operator) {
     divide: '&divide;',
     power: '^'
   }
-  return mapper[operator] || ''
+  return $('<h1>').html(mapper[operator] || '')
 }
 
 function resetCalculator() {
