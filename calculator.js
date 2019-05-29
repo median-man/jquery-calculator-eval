@@ -1,4 +1,6 @@
-var arrNumbers = []
+var arrNumbers
+var arrOperators
+var curi
 
 $(document).ready(function(){
 	resetCalculator();
