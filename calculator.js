@@ -1,5 +1,6 @@
-$(document).ready(function(){
+var arrNumbers = []
 
+$(document).ready(function(){
 	resetCalculator();
 
 	// handle click on a number
@@ -8,8 +9,7 @@ $(document).ready(function(){
 			arrNumbers.push("");
 		}
 		arrNumbers[curi] += this.value;
-		$("#first-number").html(arrNumbers[0]);
-		$("#second-number").html(arrNumbers[1]);
+		renderInput();
 	});
 
 	// handle click on an operator
@@ -24,8 +24,6 @@ $(document).ready(function(){
 		var result;
 		result = doMath(arrNumbers, arrOperators);
 		$("#result").html(result);
-		log();
-		console.log(result);
 		resetCalculator();
 	});
 
@@ -41,6 +39,11 @@ $(document).ready(function(){
 		resetCalculator();
 	});
 });
+
+function renderInput() {
+  $("#first-number").html(arrNumbers[0]);
+  $("#second-number").html(arrNumbers[1]);
+}
 
 function resetCalculator() {
 	arrNumbers = [];
